@@ -1,7 +1,7 @@
 
 #include "WS2813Panel.h"
 
-WS2813Panel panel1;
+WS2813Panel panel1(1);
 
 void setup()
 {

@@ -11,9 +11,9 @@
 #define PIN 14
 
 
-WS2813Panel::WS2813Panel()
+WS2813Panel::WS2813Panel(int num)
 {
-    pixels = new Adafruit_NeoPixel(LED_COUNT, PIN, NEO_GRB + NEO_KHZ800);
+    pixels = new Adafruit_NeoPixel(LED_COUNT * num, PIN, NEO_GRB + NEO_KHZ800);
     pixels->begin();
     pixels->show();
 }
