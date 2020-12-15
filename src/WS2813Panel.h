@@ -35,6 +35,8 @@ public:
 
 	void Fill(uint32_t color, uint16_t first, uint16_t count);
 
+	uint8_t GetBright();//外部の明るさ
+
 private:
 	Adafruit_NeoPixel *pixels;
 	uint8_t panel_num;

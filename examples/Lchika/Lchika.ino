@@ -13,8 +13,11 @@ WS2813Panel Panelx5(5);
 
 uint8_t bright = 50;
 unsigned long delayTime;
-int COLOR = 0;
+uint32_t COLOR[3] = {0xff0000, 0x00ff00, 0x0000ff};
 int MODE = 0;
+
+int ChangeTime = 3000; //表示切替時間(msec)
+uint NextChange;
 
 //------------------------------------
 void setup()
@@ -47,17 +50,25 @@ void setup()
 
   Serial.println("-- Default Test --");
   delayTime = 1000;
+  NextChange = millis() + ChangeTime;
 }
 
 //------------------------------------
 void loop()
 {
-  Panelx5.SetBrightness(bright);
-  // bright -= 8;
-
+  if (millis() > NextChange)
+  {
+    MODE = (MODE + 1) % 3;
+    NextChange = millis() + ChangeTime;
+  }
   printValues(MODE);
-  MODE = (MODE + 1) % 3;
-  delay(3000);
+  // int light = system_adc_read(); // 1024.0 ;
+  uint8_t light = Panelx5.GetBright();
+  Serial.printf("Bright = %d\n", light);
+  Panelx5.SetBrightness(light * 2 + 20);
+
+  delay(10);
+
   return;
   /*
   Serial.println("Red Start");
@@ -141,30 +152,30 @@ void printValues(int mode)
 //--------------------------------
 void DispTemp(float t)
 {
-  uint8_t dec_temp[5];  // [4]符号 [3][2].[1] [0]℃
-  dec_temp[0] = 20; //℃
+  uint8_t dec_temp[5]; // [4]符号 [3][2].[1] [0]℃
+  dec_temp[0] = 20;    //℃
   //温度を10倍
   int tempx10 = int(abs(t * 10.0));
   //マイナス
-  if(t < 0)
+  if (t < 0)
     dec_temp[4] = 0x11;
   else
     dec_temp[4] = 0x10;
-  
+
   for (int i = 1; i < 4; i++)
   {
     dec_temp[i] = tempx10 % 10;
     tempx10 = tempx10 / 10;
   }
-  if(abs(t) < 10)
+  if (abs(t) < 10)
     dec_temp[3] = 0x10;
 
   for (int pnl = 0; pnl < 5; pnl++)
   {
-      Panelx5.DispNum(pnl, dec_temp[pnl], 100);
+    Panelx5.DispNum(pnl, dec_temp[pnl], COLOR[0]);
   }
   //パネル2枚目に小数点
-  Panelx5.DispDot(2, 100);
+  Panelx5.DispDot(2, COLOR[0]);
   Panelx5.Show();
 }
 
@@ -187,10 +198,10 @@ void DispHumid(float h)
     if (pnl == 4 && dec_temp[pnl] == 0)
       Panelx5.SetPanelColor(pnl, 0);
     else
-      Panelx5.DispNum(pnl, dec_temp[pnl], 100);
+      Panelx5.DispNum(pnl, dec_temp[pnl], COLOR[1]);
   }
   //パネル2枚目に小数点
-  Panelx5.DispDot(2, 100);
+  Panelx5.DispDot(2, COLOR[1]);
   Panelx5.Show();
 }
 //------------------------------------
@@ -212,7 +223,7 @@ void DispPress(float p)
     if (pnl == 4 && dec_temp[pnl] == 0)
       Panelx5.SetPanelColor(pnl, 0);
     else
-      Panelx5.DispNum(pnl, dec_temp[pnl], 100);
+      Panelx5.DispNum(pnl, dec_temp[pnl], COLOR[2]);
   }
   Panelx5.Show();
 }

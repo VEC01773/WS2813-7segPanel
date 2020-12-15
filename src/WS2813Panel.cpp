@@ -7,6 +7,12 @@
 #include <Adafruit_NeoPixel.h>
 #include "WS2813Panel.h"
 
+//ADC
+extern "C" {
+#include "user_interface.h"
+}
+
+
 #define LED_COUNT 24
 #define PIN 14
 
@@ -145,4 +151,17 @@ void WS2813Panel::DispDot(uint8_t pnl_no, uint32_t color)
 void WS2813Panel::Fill(uint32_t color, uint16_t first, uint16_t count)
 {
     pixels->fill(color, first, count);
+}
+//-------------------------------------------------
+//外の明るさを取得　8回の平均値 0-100
+//-------------------------------------------------
+uint8_t WS2813Panel::GetBright()
+{
+	uint16_t sum = 0;
+    double ave = 0;
+    for (int i = 0; i < 8; i++)
+		sum  += system_adc_read();
+    ave = ((double)sum /8.0);
+
+	return (uint8_t)(ave /1024.0 * 100.0);
 }
