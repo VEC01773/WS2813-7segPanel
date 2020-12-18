@@ -49,6 +49,7 @@ WS2813Panel::WS2813Panel(uint8_t num)
 {
     panel_num = num;
     pixels = new Adafruit_NeoPixel(LED_COUNT * num, PIN, NEO_GRB + NEO_KHZ800);
+    AutoBright = false;
 }
 //-----------------
 void  WS2813Panel::Begin()
@@ -58,6 +59,11 @@ void  WS2813Panel::Begin()
 //-----------------
 void  WS2813Panel::Show()
 {
+    if(AutoBright)
+    {
+        uint8_t brt = GetBright();
+        pixels->setBrightness(10 + brt);
+    }
     pixels->show();
 }
 //-----------------
@@ -137,7 +143,7 @@ void WS2813Panel::DispNum(uint8_t pnl_no, uint8_t num, uint32_t color)
     else
       pixels->setPixelColor(first + j, color * ((nums[num] >> (21 - j)) & 0x01));
   }
-  pixels->show();
+//   pixels->show();
 }
 //-----------------
 void WS2813Panel::DispDot(uint8_t pnl_no, uint32_t color)
@@ -146,6 +152,17 @@ void WS2813Panel::DispDot(uint8_t pnl_no, uint32_t color)
   pixels->setPixelColor(first + 21, color);
   pixels->show();
 }
+
+//-----------------
+void WS2813Panel::DispColon(uint8_t pnl_no, uint32_t color)
+{
+  int first = pnl_no * LED_COUNT;
+  pixels->setPixelColor(first + 22, color);
+  pixels->setPixelColor(first + 23, color);
+//   pixels->show();
+}
+
+
 
 //-----------------
 void WS2813Panel::Fill(uint32_t color, uint16_t first, uint16_t count)

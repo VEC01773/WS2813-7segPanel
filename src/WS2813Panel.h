@@ -13,6 +13,8 @@ public:
 
 	WS2813Panel(uint8_t num);
 
+	bool AutoBright;
+
 	void Begin();
 	void Show();
 	void Clear();
@@ -32,14 +34,17 @@ public:
 
 	void DispNum(uint8_t pnl_no, uint8_t num, uint32_t color);
 	void DispDot(uint8_t pnl_no, uint32_t color);
+	void DispColon(uint8_t pnl_no, uint32_t color);
 
 	void Fill(uint32_t color, uint16_t first, uint16_t count);
 
 	uint8_t GetBright();//外部の明るさ
+	
 
 private:
 	Adafruit_NeoPixel *pixels;
 	uint8_t panel_num;
+
 
 };
 #endif

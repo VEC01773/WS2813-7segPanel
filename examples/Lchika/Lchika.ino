@@ -6,10 +6,11 @@
 #include <Adafruit_BME280.h>
 
 #define SEALEVELPRESSURE_HPA (1013.25)
+#define PANEL_NUM 12
 
 Adafruit_BME280 bme; // I2C
 
-WS2813Panel Panelx5(5);
+WS2813Panel MyPanel(PANEL_NUM);
 
 uint8_t bright = 50;
 unsigned long delayTime;
@@ -26,8 +27,8 @@ void setup()
 
   Serial.begin(115200);
   Serial.println("Start");
-  Panelx5.Begin();
-  Panelx5.Show();
+  MyPanel.Begin();
+  MyPanel.Show();
   Serial.println("End");
 
   Wire.begin(4, 5);
@@ -49,8 +50,11 @@ void setup()
   }
 
   Serial.println("-- Default Test --");
+  PanelCheck();
+  
   delayTime = 1000;
   NextChange = millis() + ChangeTime;
+
 }
 
 //------------------------------------
@@ -63,51 +67,31 @@ void loop()
   }
   printValues(MODE);
   // int light = system_adc_read(); // 1024.0 ;
-  uint8_t light = Panelx5.GetBright();
+  uint8_t light = MyPanel.GetBright();
   Serial.printf("Bright = %d\n", light);
-  Panelx5.SetBrightness(light * 2 + 20);
+  MyPanel.SetBrightness(light * 2 + 20);
 
   delay(10);
-
-  return;
-  /*
-  Serial.println("Red Start");
-  Panelx5.SetPixcelColor(0, 100, 0, 0);
-  Panelx5.Show();
-  delay(500);
-  Serial.println("Red End");
-
-  Serial.println("Blue Start");
-  Panelx5.SetPanelColor(0, 0, 100, 0);
-  Panelx5.Show();
-  delay(500);
-  Serial.println("Blue End");
-
-  Serial.println("Green Start");
-  Panelx5.SetPanelColor(0, 0, 0, 100);
-  Panelx5.Show();
-  delay(500);
-  Serial.println("Green end");
-
-  Panelx5.Clear();
-  int cnt = 99999;
-  uint8_t num = 0;
-  int temp = cnt;
-  while (cnt > 0)
-  {
-    temp = cnt;
-    for (int pnl = 0; pnl < 5; pnl++)
-    {
-      num = temp % 10;
-      Panelx5.DispNum(pnl, num, 100);
-      temp = temp / 10;
-    }
-    Panelx5.Show();
-    delay(1);
-    cnt--;
-  }
-  */
 }
+//--------------------------------
+void PanelCheck()
+{
+  MyPanel.SetBrightness(30);
+  for (int col = 1; col < 8; col++)
+  {
+    for (int num = 0; num <= 9; num++)
+    {
+      for (int i = 0; i < PANEL_NUM; i++)
+      {
+        int color = (0xff0000 * (col & 1)) + (0x00ff00 * ((col>>1) & 1)) + (0x0000ff * ((col>>2) & 1));  
+        MyPanel.DispNum(i, num,  color); //0xff0000 * (col & 1)  + );
+      }
+      MyPanel.Show();
+        delay(100);
+    }
+  }
+}
+
 //--------------------------------
 void printValues(int mode)
 {
@@ -172,11 +156,11 @@ void DispTemp(float t)
 
   for (int pnl = 0; pnl < 5; pnl++)
   {
-    Panelx5.DispNum(pnl, dec_temp[pnl], COLOR[0]);
+    MyPanel.DispNum(pnl, dec_temp[pnl], COLOR[0]);
   }
   //パネル2枚目に小数点
-  Panelx5.DispDot(2, COLOR[0]);
-  Panelx5.Show();
+  MyPanel.DispDot(2, COLOR[0]);
+  MyPanel.Show();
 }
 
 //------------------------------------
@@ -196,13 +180,13 @@ void DispHumid(float h)
   for (int pnl = 0; pnl < 5; pnl++)
   {
     if (pnl == 4 && dec_temp[pnl] == 0)
-      Panelx5.SetPanelColor(pnl, 0);
+      MyPanel.SetPanelColor(pnl, 0);
     else
-      Panelx5.DispNum(pnl, dec_temp[pnl], COLOR[1]);
+      MyPanel.DispNum(pnl, dec_temp[pnl], COLOR[1]);
   }
   //パネル2枚目に小数点
-  Panelx5.DispDot(2, COLOR[1]);
-  Panelx5.Show();
+  MyPanel.DispDot(2, COLOR[1]);
+  MyPanel.Show();
 }
 //------------------------------------
 void DispPress(float p)
@@ -221,9 +205,9 @@ void DispPress(float p)
   for (int pnl = 0; pnl < 5; pnl++)
   {
     if (pnl == 4 && dec_temp[pnl] == 0)
-      Panelx5.SetPanelColor(pnl, 0);
+      MyPanel.SetPanelColor(pnl, 0);
     else
-      Panelx5.DispNum(pnl, dec_temp[pnl], COLOR[2]);
+      MyPanel.DispNum(pnl, dec_temp[pnl], COLOR[2]);
   }
-  Panelx5.Show();
+  MyPanel.Show();
 }
