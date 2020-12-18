@@ -13,11 +13,8 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 
-#define SEALEVELPRESSURE_HPA (1013.25)
 #define PANEL_NUM 12
 #define JST 3600 * 9
-
-Adafruit_BME280 bme; // I2C
 
 WS2813Panel MyPanel(PANEL_NUM);
 
@@ -30,6 +27,12 @@ void setup()
 {
   Serial.begin(115200);
   Serial.println("Program Start");
+
+  Serial.println("LED Initialze");
+  MyPanel.Begin();
+  delay(10);
+  MyPanel.Clear();
+  MyPanel.Show();
 
   //WiFiManager
   //Local intialization. Once its business is done, there is no need to keep it around
@@ -47,22 +50,6 @@ void setup()
   configTzTime("JST-9", "ntp.nict.jp", "ntp.jst.mfeed.ad.jp"); // 2.7.0以降, esp32コンパチ
 
   pinMode(0, INPUT);
-
-  Serial.println("LED Initialze");
-  MyPanel.Begin();
-  MyPanel.Show();
-
-  Serial.println("BME280 Initialize");
-  //I2c初期化　SDA=4、SCK=5
-  Wire.begin(4, 5);
-  unsigned status = bme.begin(0x76);
-  if (!status)
-  {
-    Serial.println("Could not find a valid BME280 sensor, check wiring, address, sensor ID!");
-    Serial.print("SensorID was: 0x");
-    Serial.println(bme.sensorID(), 16);
-    delay(10);
-  }
 }
 
 //------------------------------------
@@ -74,17 +61,17 @@ void loop()
   tm = localtime(&t);
 
   int color = (0xff0000 * (ColorIndex & 1)) + (0x00ff00 * ((ColorIndex >> 1) & 1)) + (0x0000ff * ((ColorIndex >> 2) & 1));
- 
+
   //MyPanel.SetBrightness(30);
   //照度自動調整ON
   MyPanel.AutoBright = true;
-  // MyPanel.Clear();
+  
+  //月日表示
   DispDate(tm, color);
-  //  delay(1000);
-  // MyPanel.Clear();
+  //時分秒表示
   DispClock(tm, color);
-  //  delay(1000);
 
+  //スイッチ監視(チャタリング防止)
   if (digitalRead(0) == LOW)
   {
     swstat = (swstat << 1) | 0x1;
@@ -94,7 +81,7 @@ void loop()
       ColorIndex++;
       if (ColorIndex > 7)
         ColorIndex = 1;
-      swstat = 0;  
+      swstat = 0;
     }
   }
   else
@@ -121,7 +108,7 @@ void DispDate(struct tm *tm, uint32_t color)
     else
       MyPanel.DispNum(7 - i, mnum[i], color);
   }
-  MyPanel.DispNum(8, 0x11, color); //-
+  MyPanel.DispNum(8, 0x11, color); //月と日の間に「-」
 
   int d = tm->tm_mday;
   int8_t dnum[2];
