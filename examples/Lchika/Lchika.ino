@@ -18,7 +18,7 @@ uint32_t COLOR[3] = {0xff0000, 0x00ff00, 0x0000ff};
 int MODE = 0;
 
 int ChangeTime = 3000; //表示切替時間(msec)
-uint NextChange;
+uint NextGetTime;
 
 //------------------------------------
 void setup()
@@ -53,17 +53,17 @@ void setup()
   PanelCheck();
   
   delayTime = 1000;
-  NextChange = millis() + ChangeTime;
+  NextGetTime = millis() + ChangeTime;
 
 }
 
 //------------------------------------
 void loop()
 {
-  if (millis() > NextChange)
+  if (millis() > NextGetTime)
   {
     MODE = (MODE + 1) % 3;
-    NextChange = millis() + ChangeTime;
+    NextGetTime = millis() + ChangeTime;
   }
   printValues(MODE);
   // int light = system_adc_read(); // 1024.0 ;
