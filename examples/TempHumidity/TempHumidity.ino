@@ -16,8 +16,8 @@ WS2813Panel MyPanel(PANEL_NUM);
 //温湿度センサ
 DHTesp dht;
 
-const uint8_t BRITE_MIN = 10;  //LEDの明るさ最低
-const uint8_t BRITE_MAX = 200; //LEDの明るさ最高　最大値は255　電流を見て決める
+const uint8_t BRITE_MIN = 0x10;  //LEDの明るさ最低
+const uint8_t BRITE_MAX = 0xFF; //LEDの明るさ最高　最大値はFF(255)　電流を見て決める
 int MODE = 0;
 
 uint32_t COLOR[3] = {0xff0000, 0x00ff00, 0x0000ff};
@@ -29,7 +29,7 @@ float THI;		   //不快指数
 int Interval = 3000; //データ更新時間(msec)
 uint NextGetTime;	 //次回データ取得時間(msec)
 
-uint8_t bright = 50; //明るさ
+uint8_t bright = 0x20; //明るさ
 uint8_t swstat = 0;	 //ボタンの状態記録用　チャタリング防止
 
 //-------------------------------------------------
@@ -64,7 +64,7 @@ void loop()
 		//Serial.println(swstat);
 		if (swstat == 0x0F)
 		{
-			bright += 0x08;
+			bright += 0x20;
 			if (bright < BRITE_MIN)
 				bright = BRITE_MIN;
 			swstat = 0;
