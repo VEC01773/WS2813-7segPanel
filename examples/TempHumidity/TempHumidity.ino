@@ -18,9 +18,6 @@ DHTesp dht;
 
 const uint8_t BRITE_MIN = 0x10;  //LEDの明るさ最低
 const uint8_t BRITE_MAX = 0xFF; //LEDの明るさ最高　最大値はFF(255)　電流を見て決める
-int MODE = 0;
-
-uint32_t COLOR[3] = {0xff0000, 0x00ff00, 0x0000ff};
 
 float humidity;	   //湿度
 float temperature; //温度
