@@ -1,3 +1,8 @@
+/*
+　echo dotに「アレクサ　さいころ」と語りかけると
+　パネルの数字が変化してランダムな値で止まる
+　電子サイコロ
+*/
 
 #include <ESP8266WiFi.h> //https://github.com/esp8266/Arduino
 
@@ -57,7 +62,7 @@ void setup()
 //-------------------------------
 void loop()
 {
-    //スイッチ監視
+    //スイッチ監視　明るさを変更する
     if (digitalRead(PIN_BUTTON) == LOW)
     {
         swstat = (swstat << 1) | 0x1;
@@ -87,6 +92,8 @@ void Dice(uint8_t dmy)
     randomSeed(millis());
     int num;
     int temp;
+
+    //数字を30回変化させる　変化する間隔はだんだん遅くなる
     for (int i = 0; i < 30; i++)
     {
         temp = random(1, 7);
@@ -97,6 +104,7 @@ void Dice(uint8_t dmy)
         MyPanel.Show();
         delay(i * 20);
     }
+    //停止した数字を点滅3回
     for (int j = 0; j < 3; j++)
     {
         MyPanel.DispNum(0, num, 0);
