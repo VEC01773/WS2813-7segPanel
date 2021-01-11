@@ -1,4 +1,13 @@
+/*
+DataTime　Clock
 
+パネル12枚を使った　年月日　時分秒の時計
+明るさは外部の明るさに合わせて自動調整する
+表示色はパネル裏のスイッチを押すことで変化する
+
+・時間はNTPサーバから取得するためWiFiに接続する必要あり
+
+*/
 
 #include <ESP8266WiFi.h> //https://github.com/esp8266/Arduino
 

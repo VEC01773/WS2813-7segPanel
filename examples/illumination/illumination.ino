@@ -1,4 +1,8 @@
 
+/*
+  パネル12枚でイルミネーション
+*/
+
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
 
