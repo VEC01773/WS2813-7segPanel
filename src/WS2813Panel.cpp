@@ -162,7 +162,13 @@ void WS2813Panel::DispColon(uint8_t pnl_no, uint32_t color)
 //   pixels->show();
 }
 
-
+//-----------------
+void WS2813Panel::DispLEDIndex(uint8_t pnl_no, uint8_t index, uint32_t color)
+{
+  int first = pnl_no * LED_COUNT;
+  pixels->setPixelColor(first + index, color);
+//   pixels->show();
+}
 
 //-----------------
 void WS2813Panel::Fill(uint32_t color, uint16_t first, uint16_t count)

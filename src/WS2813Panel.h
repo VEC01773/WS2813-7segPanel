@@ -35,6 +35,7 @@ public:
 	void DispNum(uint8_t pnl_no, uint8_t num, uint32_t color);
 	void DispDot(uint8_t pnl_no, uint32_t color);
 	void DispColon(uint8_t pnl_no, uint32_t color);
+	void DispLEDIndex(uint8_t pnl_no, uint8_t index, uint32_t color);
 
 	void Fill(uint32_t color, uint16_t first, uint16_t count);
 
