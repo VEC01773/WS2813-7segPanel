@@ -1,3 +1,3 @@
 # WS2813-7segPanel
 7-segment panel with full-color LED
-https://github.com/VEC01773/WS2813-7segPanel/issues/1#issue-860325861
+![単体表裏](https://user-images.githubusercontent.com/16524415/115102403-87a2eb00-9f85-11eb-8bcc-5f188822a48b.png)
