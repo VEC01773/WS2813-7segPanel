@@ -5,7 +5,7 @@
 #include <Adafruit_NeoPixel.h>
 #include <cstdint>
 
-#define LIBVERSION "1.0.0" // To be deprecated
+#define LIBVERSION "1.0.1" // To be deprecated
 
 
 class WS2813Panel {
