@@ -14,6 +14,7 @@
 - WS2813-7SegPanel制御用のオリジナルのArduinoライブラリーを提供しますので、NeoPicxelのライブラリーを使わなくて簡単に数字等を表示できます。
 ## 説明書
 * パネル説明書 [WS2813-7seg.pdf](https://github.com/VEC01773/WS2813-7segPanel/files/6328792/WS2813-7seg.pdf)
+* WS2813-7segPanel/WS2813-7seg.pdf
 * 回路図 [WS2813-7seg回路図.pdf](https://github.com/VEC01773/WS2813-7segPanel/files/6328812/WS2813-7seg.pdf)
 ## YouTube
 https://youtu.be/H91M6mf0KGw
