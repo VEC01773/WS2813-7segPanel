@@ -13,5 +13,5 @@
 - コントローラ (ESP-WROOM-02) はWiFiでインターネットに接続できるのでインターネットを使ったいろいろなサービス利用できます。(天気予報取得、NTP時計、データロガー等)
 - WS2813-7SegPanel制御用のオリジナルのArduinoライブラリーを提供しますので、NeoPicxelのライブラリーを使わなくて簡単に数字等を表示できます。
 ## 説明書
-[WS2813-7seg.pdf](https://github.com/VEC01773/WS2813-7segPanel/files/6328792/WS2813-7seg.pdf)
-回路図 [WS2813-7seg回路図.pdf](https://github.com/VEC01773/WS2813-7segPanel/files/6328812/WS2813-7seg.pdf)
+* パネル説明書 [WS2813-7seg.pdf](https://github.com/VEC01773/WS2813-7segPanel/files/6328792/WS2813-7seg.pdf)
+* 回路図 [WS2813-7seg回路図.pdf](https://github.com/VEC01773/WS2813-7segPanel/files/6328812/WS2813-7seg.pdf)
