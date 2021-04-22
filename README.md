@@ -1,5 +1,6 @@
 # WS2813-7segPanel
-###7-segment panel with full-color LED
+7-segment panel with full-color LED
+
 フルカラーLED　24個を82×100mm基板に7セグ風に配置したプリント基板です。
 この基板はジャンパーパターンを半田でショートすることで、上下左右に連結可能なため任意の桁数の7セグ表示器ができます。
 ![単体表裏](https://user-images.githubusercontent.com/16524415/115102403-87a2eb00-9f85-11eb-8bcc-5f188822a48b.png)
