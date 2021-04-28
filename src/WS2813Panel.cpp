@@ -1,7 +1,3 @@
-// This library is free software; you can redistribute it and/or
-// modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either
-// version 2.1 of the License, or (at your option) any later version.
 
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
@@ -12,10 +8,11 @@ extern "C" {
 #include "user_interface.h"
 }
 
-
 #define LED_COUNT 24
 #define PIN 14
-
+#define DOT 21
+#define COLON1 22
+#define COLON2 23
 
 int nums[] =
 {
@@ -148,23 +145,20 @@ void WS2813Panel::DispNum(uint8_t pnl_no, uint8_t num, uint32_t color)
     else
       pixels->setPixelColor(first + j, color * ((nums[num] >> (21 - j)) & 0x01));
   }
-//   pixels->show();
 }
 //-----------------
 void WS2813Panel::DispDot(uint8_t pnl_no, uint32_t color)
 {
   int first = pnl_no * LED_COUNT;
-  pixels->setPixelColor(first + 21, color);
-  pixels->show();
+  pixels->setPixelColor(first + DOT, color);
 }
 
 //-----------------
 void WS2813Panel::DispColon(uint8_t pnl_no, uint32_t color)
 {
   int first = pnl_no * LED_COUNT;
-  pixels->setPixelColor(first + 22, color);
-  pixels->setPixelColor(first + 23, color);
-//   pixels->show();
+  pixels->setPixelColor(first + COLON1, color);
+  pixels->setPixelColor(first + COLON2, color);
 }
 
 //-----------------
@@ -172,7 +166,6 @@ void WS2813Panel::DispLEDIndex(uint8_t pnl_no, uint8_t index, uint32_t color)
 {
   int first = pnl_no * LED_COUNT;
   pixels->setPixelColor(first + index, color);
-//   pixels->show();
 }
 
 //-----------------
@@ -181,7 +174,7 @@ void WS2813Panel::Fill(uint32_t color, uint16_t first, uint16_t count)
     pixels->fill(color, first, count);
 }
 //-------------------------------------------------
-//外の明るさを取得　8回の平均値 0-100
+//Get 8 times average brightness 0-100
 //-------------------------------------------------
 uint8_t WS2813Panel::GetBright()
 {

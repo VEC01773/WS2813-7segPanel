@@ -5,7 +5,7 @@
 #include <Adafruit_NeoPixel.h>
 #include <cstdint>
 
-#define LIBVERSION "1.0.1" // To be deprecated
+#define LIBVERSION "1.0.2" // To be deprecated
 
 
 class WS2813Panel {
@@ -39,7 +39,7 @@ public:
 
 	void Fill(uint32_t color, uint16_t first, uint16_t count);
 
-	uint8_t GetBright();//外部の明るさ
+	uint8_t GetBright();
 	
 
 private:
