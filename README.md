@@ -17,4 +17,4 @@
 * パネル説明書 [WS2813-7seg.pdf](https://github.com/VEC01773/WS2813-7segPanel/files/6356196/WS2813-7seg.pdf)
 * 回路図 [WS2813-7seg回路図.pdf](https://github.com/VEC01773/WS2813-7segPanel/files/6328812/WS2813-7seg.pdf)
 ## YouTube
-https://youtu.be/H91M6mf0KGw
+https://youtu.be/SeoeUBH3Rpc
