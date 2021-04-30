@@ -19,5 +19,5 @@
 ## YouTube
 https://youtu.be/SeoeUBH3Rpc
 ## Qiita
-* フルカラー7セグLED(WS2813-7segPanel)でお天気時計を作ろう(https://qiita.com/VEC01773/items/10ce7e36fe853ed73f64)
+* ![お天気時計を作ろう](https://qiita.com/VEC01773/items/10ce7e36fe853ed73f64)
 
