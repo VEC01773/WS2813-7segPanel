@@ -18,6 +18,6 @@
 * 回路図 [WS2813-7seg回路図.pdf](https://github.com/VEC01773/WS2813-7segPanel/files/6328812/WS2813-7seg.pdf)
 ## YouTube
 https://youtu.be/SeoeUBH3Rpc
-## Qiita
-https://qiita.com/VEC01773/items/10ce7e36fe853ed73f64
+## 応用例
+* [お天気時計](https://qiita.com/VEC01773/items/10ce7e36fe853ed73f64)
 
