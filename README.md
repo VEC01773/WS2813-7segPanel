@@ -20,4 +20,5 @@
 https://youtu.be/SeoeUBH3Rpc
 ## 応用例
 * [お天気時計](https://qiita.com/VEC01773/items/10ce7e36fe853ed73f64)
+* [電子サイコロ](https://qiita.com/VEC01773/items/b0d13decda539713b628)
 
