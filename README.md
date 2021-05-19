@@ -16,6 +16,12 @@
 ## 説明書
 * パネル説明書 [WS2813-7seg.pdf](https://github.com/VEC01773/WS2813-7segPanel/files/6445450/WS2813-7seg.pdf)
 * 回路図 [WS2813-7seg回路図.pdf](https://github.com/VEC01773/WS2813-7segPanel/files/6328812/WS2813-7seg.pdf)
+
+## 入手方法
+[スイッチサイエンス殿](https://www.switch-science.com/)で販売させてもらってます。
+* [コントローラ付基板](https://www.switch-science.com/catalog/7165/)
+* [コントローラ無し基板](https://www.switch-science.com/catalog/7166/)
+
 ## YouTube
 https://youtu.be/SeoeUBH3Rpc
 ## 応用例
